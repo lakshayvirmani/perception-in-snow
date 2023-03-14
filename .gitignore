@@ -1,6 +1,8 @@
 *.pem
 
+*work_dirs*
 *checkpoints*
+*pretrained*
 *data*
 
 # Byte-compiled / optimized / DLL files
