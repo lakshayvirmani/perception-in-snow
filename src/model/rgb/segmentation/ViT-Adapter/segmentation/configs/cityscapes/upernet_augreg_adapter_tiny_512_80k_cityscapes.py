@@ -84,6 +84,6 @@ runner = dict(type='IterBasedRunner')
 
 checkpoint_config = dict(by_epoch=False, interval=1000, max_keep_ckpts=1)
 
-evaluation = dict(interval=1000, metric='mIoU', save_best='mIoU')
+evaluation = dict(interval=8000, metric='mIoU', save_best='mIoU')
 
 fp16 = dict(loss_scale=dict(init_scale=512))
