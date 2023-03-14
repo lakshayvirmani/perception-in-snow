@@ -10,3 +10,5 @@ RUN pip install mmcv-full==1.4.2 -f https://download.openmmlab.com/mmcv/dist/cu1
 RUN pip install timm==0.4.12
 RUN pip install mmdet==2.22.0 # for Mask2Former
 RUN pip install mmsegmentation==0.20.2
+RUN cd detection/ops & sh make.sh
+RUN ln -s detection/ops segmentation/
