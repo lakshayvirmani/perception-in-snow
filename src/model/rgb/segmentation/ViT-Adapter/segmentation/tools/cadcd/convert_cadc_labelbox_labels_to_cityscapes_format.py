@@ -13,8 +13,8 @@ print(json_formatted_str)
 
 inp_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/data_renamed_and_copied'
 
-out_train_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/leftImg8Bit/train'
-out_val_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/leftImg8Bit/val'
+out_train_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/leftImg8bit/train'
+out_val_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/leftImg8bit/val'
 
 out_train_label_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/gtFine/train'
 out_val_label_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/gtFine/val'
@@ -34,8 +34,9 @@ for data in labels:
     label['imgWidth'] = 1280
     
     #print(data['External ID'])
-    img_file_name = data['External ID']
-    label_file_name = img_file_name[:-4] + '_gtFine_polygons.json'
+    org_file_name = data['External ID']
+    img_file_name = data['External ID'][:-4] + '_leftImg8bit.png'
+    label_file_name = org_file_name[:-4] + '_gtFine_polygons.json'
     
     #print(file_name)
     
@@ -60,10 +61,10 @@ for data in labels:
     #print(label)
     
     if random.random() < 0.8:
-        shutil.copyfile(os.path.join(inp_img_dir, img_file_name), os.path.join(out_train_img_dir, img_file_name))
+        shutil.copyfile(os.path.join(inp_img_dir, org_file_name), os.path.join(out_train_img_dir, img_file_name))
         json.dump(label, open(os.path.join(out_train_label_dir, label_file_name), 'w'))
     else:
-        shutil.copyfile(os.path.join(inp_img_dir, img_file_name), os.path.join(out_val_img_dir, img_file_name))
+        shutil.copyfile(os.path.join(inp_img_dir, org_file_name), os.path.join(out_val_img_dir, img_file_name))
         json.dump(label, open(os.path.join(out_val_label_dir, label_file_name), 'w'))
     
     #break
