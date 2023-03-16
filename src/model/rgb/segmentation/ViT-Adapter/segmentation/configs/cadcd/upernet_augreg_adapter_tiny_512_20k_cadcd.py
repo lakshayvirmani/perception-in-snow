@@ -2,7 +2,7 @@ _base_ = [
     '../_base_/models/upernet_r50.py', 
     '../_base_/datasets/cadcd.py',
     '../_base_/default_runtime.py', 
-    '../_base_/schedules/schedule_80k.py'
+    '../_base_/schedules/schedule_20k.py'
 ]
 
 crop_size = (512, 512)
@@ -73,7 +73,7 @@ optimizer = dict(_delete_=True, type='AdamW', lr=2e-5, betas=(0.9, 0.999), weigh
 
 lr_config = dict(_delete_=True, policy='poly',
                  warmup='linear',
-                 warmup_iters=1500,
+                 warmup_iters=375,
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
 
@@ -84,8 +84,8 @@ data=dict(samples_per_gpu=2,
 
 runner = dict(type='IterBasedRunner')
 
-checkpoint_config = dict(by_epoch=False, interval=1000, max_keep_ckpts=1)
+checkpoint_config = dict(by_epoch=False, interval=100, max_keep_ckpts=1)
 
-evaluation = dict(interval=8000, metric='mIoU', save_best='mIoU')
+evaluation = dict(interval=100, metric='mIoU', save_best='mIoU')
 
 fp16 = dict(loss_scale=dict(init_scale=512))
