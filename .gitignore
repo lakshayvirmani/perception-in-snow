@@ -3,7 +3,7 @@
 *work_dirs*
 *checkpoints*
 *pretrained*
-*data*
+data/*
 
 # Byte-compiled / optimized / DLL files
 *.DS_Store
