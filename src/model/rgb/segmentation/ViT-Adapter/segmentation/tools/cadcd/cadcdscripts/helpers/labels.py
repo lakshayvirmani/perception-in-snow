@@ -62,7 +62,9 @@ Label = namedtuple( 'Label' , [
 labels = [
     #       name                     id    trainId   category            catId     hasInstances   ignoreInEval   color
     Label(  'unlabeled'            ,  0 ,      255 , 'void'            , 0       , False        , True         , (  0,  0,  0) ),
-    Label(  'road'                 ,  7 ,        0 , 'flat'            , 1       , False        , False        , (128, 64,128) ),
+    Label(  'road'                 ,  1 ,        0 , 'flat'            , 1       , False        , False        , (128, 64,128) ),
+    Label(  'vehicle'              ,  2 ,        1 , 'vehicle'         , 7       , True         , False        , (  0,  0,142) ),
+    Label(  'person'               ,  3 ,        2 , 'human'           , 6       , True         , False        , (220, 20, 60) )
 ]
 
 

@@ -7,10 +7,8 @@ _base_ = [
 
 crop_size = (512, 512)
 
-# TODO: Should we use this or cityscapes pretrained?
 pretrained = 'pretrained/Ti_16-i21k-300ep-lr_0.001-aug_none-wd_0.03-do_0.0-sd_0.0--imagenet2012-steps_20k-lr_0.03-res_224.pth'
 
-# TODO: Check if num classes should be 1 or 2.
 model = dict(
     pretrained=pretrained,
     backbone=dict(
@@ -30,8 +28,8 @@ model = dict(
         interaction_indexes=[[0, 2], [3, 5], [6, 8], [9, 11]],
         window_attn=[False] * 12,
         window_size=[None] * 12),
-    decode_head=dict(num_classes=1, in_channels=[192, 192, 192, 192]),
-    auxiliary_head=dict(num_classes=1, in_channels=192),
+    decode_head=dict(num_classes=3, in_channels=[192, 192, 192, 192]),
+    auxiliary_head=dict(num_classes=3, in_channels=192),
     test_cfg=dict(mode='slide', crop_size=crop_size, stride=(341, 341))
 )
 

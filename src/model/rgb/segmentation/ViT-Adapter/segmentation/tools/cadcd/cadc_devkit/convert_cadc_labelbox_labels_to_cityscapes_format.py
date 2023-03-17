@@ -2,15 +2,17 @@ import json
 import os
 import shutil
 import random
+from cadc_annotation_helper import build_objects_from_3d_annotation
 
-label_box_export_file = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/export-2023-03-16T16_10_32.997Z.json'
+label_box_export_file = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/export-2023-03-17T05 18 42.300Z.json'
 
 labels = json.load(open(label_box_export_file, 'r'))
 
 json_formatted_str = json.dumps(labels, indent=2)
 
-print(json_formatted_str)
+#print(json_formatted_str)
 
+inp_annotation_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/'
 inp_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/data_renamed_and_copied'
 
 out_train_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/leftImg8bit/train'
@@ -57,9 +59,19 @@ for data in labels:
         
         objects.append(object)
     
-    label['objects'] = objects
-    #print(label)
+    annotations_file = '/'.join(os.path.join(inp_annotation_dir, org_file_name.replace('__', '/')).split('/')[:-4]) + '/3d_ann.json'
+    annotations_data = json.load(open(annotations_file, 'r'))
+
+    frame = int(org_file_name.replace('__', '/')[-6:-4])
     
+    calib_path = '/'.join(os.path.join(inp_annotation_dir, org_file_name.replace('__', '/')).split('/')[:-5]) + '/calib'
+    
+    cuboids = annotations_data[frame]['cuboids']
+    
+    objects.extend(build_objects_from_3d_annotation(cuboids, calib_path))
+    
+    label['objects'] = objects
+
     if random.random() < 0.8:
         shutil.copyfile(os.path.join(inp_img_dir, org_file_name), os.path.join(out_train_img_dir, img_file_name))
         json.dump(label, open(os.path.join(out_train_label_dir, label_file_name), 'w'))

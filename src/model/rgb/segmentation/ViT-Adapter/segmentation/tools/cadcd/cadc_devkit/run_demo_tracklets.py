@@ -11,14 +11,13 @@ cam = '0'
 seq = '0010'
 DISTORTED = False
 MOVE_FORWARD = False
-# BASE = "/media/matthew/WAVELAB_2TB/winter/data/"
-BASE = "/media/matthew/MOOSE-4TB/2019_02_27/"
-CALIB_BASE = "/media/matthew/WAVELAB_2TB/winter/"
+BASE = "/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/data/cadcd/2019_02_27/"
+CALIB_BASE = BASE
 
 if DISTORTED:
   path_type = 'raw'
 else:
-  path_type = 'processed'
+  path_type = 'labeled'
 
 lidar_path = BASE + seq + "/" + path_type + "/lidar_points/data/" + format(frame, '010') + ".bin";
 calib_path = CALIB_BASE + "calib/";
@@ -176,9 +175,9 @@ for cuboid in annotations_data[frame]['cuboids']:
   print(b_r_t_coord)
   print(b_l_b_coord)
   print(b_l_t_coord)
+  
+  print('#' * 10)
 
-  #break;
-
-cv2.imshow('image',img)
-# cv2.imwrite("test.png", img)
-cv2.waitKey(10000)
+#cv2.imshow('image',img)
+cv2.imwrite("test.png", img)
+#cv2.waitKey(10000)
