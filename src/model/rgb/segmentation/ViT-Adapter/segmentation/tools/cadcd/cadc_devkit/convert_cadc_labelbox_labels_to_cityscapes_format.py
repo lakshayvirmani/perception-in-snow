@@ -4,7 +4,7 @@ import shutil
 import random
 from cadc_annotation_helper import build_objects_from_3d_annotation
 
-label_box_export_file = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/export-2023-03-17T05 18 42.300Z.json'
+label_box_export_file = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/export-2023-04-12T22_28_24.384Z.json'
 
 labels = json.load(open(label_box_export_file, 'r'))
 
@@ -17,15 +17,19 @@ inp_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/data_renamed_a
 
 out_train_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/leftImg8bit/train'
 out_val_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/leftImg8bit/val'
+out_test_img_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/leftImg8bit/test'
 
 out_train_label_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/gtFine/train'
 out_val_label_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/gtFine/val'
+out_test_label_dir = '/Users/lakshayvirmani/Desktop/Projects/cadc_devkit/processed_data/cadcd/gtFine/test'
 
 os.makedirs(out_train_img_dir, exist_ok=True)
 os.makedirs(out_val_img_dir, exist_ok=True)
+os.makedirs(out_test_img_dir, exist_ok=True)
 
 os.makedirs(out_train_label_dir, exist_ok=True)
 os.makedirs(out_val_label_dir, exist_ok=True)
+os.makedirs(out_test_label_dir, exist_ok=True)
 
 print('Number of labelled images:', len(labels))
 
@@ -72,12 +76,16 @@ for data in labels:
     
     label['objects'] = objects
 
-    if random.random() < 0.8:
+    rand_val = random.random()
+    if rand_val < 0.8:
         shutil.copyfile(os.path.join(inp_img_dir, org_file_name), os.path.join(out_train_img_dir, img_file_name))
         json.dump(label, open(os.path.join(out_train_label_dir, label_file_name), 'w'))
-    else:
+    elif rand_val >= 0.8 and rand_val < 0.9:
         shutil.copyfile(os.path.join(inp_img_dir, org_file_name), os.path.join(out_val_img_dir, img_file_name))
         json.dump(label, open(os.path.join(out_val_label_dir, label_file_name), 'w'))
+    else:
+        shutil.copyfile(os.path.join(inp_img_dir, org_file_name), os.path.join(out_test_img_dir, img_file_name))
+        json.dump(label, open(os.path.join(out_test_label_dir, label_file_name), 'w'))
     
     #break
 
