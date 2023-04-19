@@ -53,11 +53,11 @@ def createLabelImage(annotation, encoding, outline=None):
 
     # the background
     if encoding == "ids":
-        background = name2label['unlabeled'].id
+        background = name2label['non-road'].id
     elif encoding == "trainIds":
-        background = name2label['unlabeled'].trainId
+        background = name2label['non-road'].trainId
     elif encoding == "color":
-        background = name2label['unlabeled'].color
+        background = name2label['non-road'].color
     else:
         print("Unknown encoding '{}'".format(encoding))
         return None
@@ -86,7 +86,8 @@ def createLabelImage(annotation, encoding, outline=None):
             label = label[:-len('group')]
 
         if not label in name2label:
-            printError( "Label '{}' not known.".format(label) )
+            #printError( "Label '{}' not known.".format(label) )
+            continue
 
         # If the ID is negative that polygon should not be drawn
         if name2label[label].id < 0:

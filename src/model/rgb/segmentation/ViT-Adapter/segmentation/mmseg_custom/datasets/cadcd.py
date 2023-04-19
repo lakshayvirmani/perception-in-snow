@@ -15,9 +15,9 @@ class CADCDataset(CustomDataset):
     fixed to '_gtFine_labelTrainIds.png' for CADC dataset.
     """
 
-    CLASSES = ('road')
+    CLASSES = ('non-road', 'road')
 
-    PALETTE = [[128, 64, 128]]
+    PALETTE = [[70, 70, 70], [128, 64, 128]]
 
     def __init__(self,
                  img_suffix='_leftImg8bit.png',

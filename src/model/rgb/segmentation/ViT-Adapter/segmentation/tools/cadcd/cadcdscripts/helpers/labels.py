@@ -61,8 +61,9 @@ Label = namedtuple( 'Label' , [
 
 labels = [
     #       name                     id    trainId   category            catId     hasInstances   ignoreInEval   color
-    Label(  'unlabeled'            ,  0 ,      255 , 'void'            , 0       , False        , True         , (  0,  0,  0) ),
-    Label(  'road'                 ,  1 ,        0 , 'flat'            , 1       , False        , False        , (128, 64,128) )
+    Label(  'unlabeled'            ,  0 ,      255 , 'void'            , 0       , False        , True         , (  0,  0,  0)),
+    Label(  'non-road'             ,  1 ,        0 , 'non-flat'        , 1       , False        , False        , ( 70, 70, 70)),
+    Label(  'road'                 ,  2 ,        1 , 'flat'            , 7       , False        , False        , (128, 64, 128))
 ]
 
 
