@@ -15,9 +15,9 @@ class CADCDataset(CustomDataset):
     fixed to '_gtFine_labelTrainIds.png' for CADC dataset.
     """
 
-    CLASSES = ('road', 'vehicle', 'person')
+    CLASSES = ('road')
 
-    PALETTE = [[128, 64, 128], [0, 0, 142], [220, 20, 60]]
+    PALETTE = [[128, 64, 128]]
 
     def __init__(self,
                  img_suffix='_leftImg8bit.png',
@@ -26,7 +26,7 @@ class CADCDataset(CustomDataset):
         super(CADCDataset, self).__init__(
             img_suffix=img_suffix, seg_map_suffix=seg_map_suffix, **kwargs)
 
-    @staticmethod
+    '''@staticmethod
     def _convert_to_label_id(result):
         """Convert trainId to id for CADC."""
         if isinstance(result, str):
@@ -144,4 +144,4 @@ class CADCDataset(CustomDataset):
                 super(CADCDataset,
                       self).evaluate(results, metrics, logger))
 
-        return eval_results
+        return eval_results'''
