@@ -132,5 +132,5 @@ lr_config = dict(_delete_=True,
 data = dict(samples_per_gpu=1,
             train=dict(pipeline=train_pipeline))
 runner = dict(type='IterBasedRunner')
-checkpoint_config = dict(by_epoch=False, interval=50, max_keep_ckpts=1)
-evaluation = dict(interval=50, metric='mIoU', save_best='mIoU')
+checkpoint_config = dict(by_epoch=False, interval=500, max_keep_ckpts=1)
+evaluation = dict(interval=500, metric='mIoU', save_best='mIoU')
