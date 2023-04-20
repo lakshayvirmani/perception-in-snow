@@ -102,7 +102,7 @@ model = dict(
                                  'ffn', 'norm')),
             init_cfg=None)
     ),
-    test_cfg=dict(mode='slide', crop_size=crop_size, stride=(512, 512))
+    test_cfg=dict(mode='slide', crop_size=crop_size, stride=(320, 320))
 )
 # dataset settings
 img_norm_cfg = dict(
