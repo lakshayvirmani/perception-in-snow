@@ -28,8 +28,8 @@ model = dict(
         interaction_indexes=[[0, 2], [3, 5], [6, 8], [9, 11]],
         window_attn=[False] * 12,
         window_size=[None] * 12),
-    decode_head=dict(num_classes=3, in_channels=[192, 192, 192, 192]),
-    auxiliary_head=dict(num_classes=3, in_channels=192),
+    decode_head=dict(num_classes=2, in_channels=[192, 192, 192, 192]),
+    auxiliary_head=dict(num_classes=2, in_channels=192),
     test_cfg=dict(mode='slide', crop_size=crop_size, stride=(341, 341))
 )
 
@@ -82,8 +82,8 @@ data=dict(samples_per_gpu=2,
 
 runner = dict(type='IterBasedRunner')
 
-checkpoint_config = dict(by_epoch=False, interval=100, max_keep_ckpts=1)
+checkpoint_config = dict(by_epoch=False, interval=500, max_keep_ckpts=1)
 
-evaluation = dict(interval=100, metric='mIoU', save_best='mIoU')
+evaluation = dict(interval=500, metric='mIoU', save_best='mIoU')
 
 fp16 = dict(loss_scale=dict(init_scale=512))

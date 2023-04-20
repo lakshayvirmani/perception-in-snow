@@ -5,7 +5,7 @@ _base_ = [
     '../_base_/default_runtime.py',
     '../_base_/schedules/schedule_20k.py'
 ]
-crop_size = (512, 512)
+crop_size = (480, 480)
 # pretrained = 'https://conversationhub.blob.core.windows.net/beit-share-public/beit/beit_large_patch16_224_pt22k_ft22k.pth'
 pretrained = 'data/beit_large_patch16_224_pt22k_ft22k.pth'
 load_from = 'https://github.com/czczup/ViT-Adapter/releases/download/v0.2.3/mask2former_beit_adapter_large_896_80k_mapillary.zip'
@@ -14,7 +14,7 @@ model = dict(
     pretrained=pretrained,
     backbone=dict(
         type='BEiTAdapter',
-        img_size=512,
+        img_size=480,
         patch_size=16,
         embed_dim=1024,
         depth=24,
@@ -132,5 +132,5 @@ lr_config = dict(_delete_=True,
 data = dict(samples_per_gpu=1,
             train=dict(pipeline=train_pipeline))
 runner = dict(type='IterBasedRunner')
-checkpoint_config = dict(by_epoch=False, interval=500, max_keep_ckpts=1)
-evaluation = dict(interval=500, metric='mIoU', save_best='mIoU')
+checkpoint_config = dict(by_epoch=False, interval=100, max_keep_ckpts=1)
+evaluation = dict(interval=100, metric='mIoU', save_best='mIoU')
