@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CADCDataset'
-data_root = 'data/cadcd/'
+data_root = 'data/gif_data/27_02_2019_seq_24/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 crop_size = (512, 512)
@@ -49,6 +49,5 @@ data = dict(
     test=dict(
         type=dataset_type,
         data_root=data_root,
-        img_dir='leftImg8bit/val',
-        ann_dir='gtFine/val',
+        img_dir='data',
         pipeline=test_pipeline))
